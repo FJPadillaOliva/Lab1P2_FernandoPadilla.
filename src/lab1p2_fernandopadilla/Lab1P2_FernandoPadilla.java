@@ -37,13 +37,18 @@ static Scanner read = new Scanner(System.in);
                 case 2:
                     double numero = 0;
                     int limite = 0;
+                    double resultado = 0;
                     System.out.println("Ingrese el numero a evaluar: ");
                     numero = read.nextInt();
                     System.out.println("Ingrese el limite de la sumatoria: ");
                     limite = read.nextInt();
-                    double tan = tan(numero,limite,1);
                     System.out.println("El seno de " + numero +" es de: "+sen(numero, limite, 0));
-                    System.out.println("El coseno de "+ numero + " es de : "+cos(numero, limite, opcion));
+                    System.out.println("El coseno de "+ numero + " es de : "+cos(numero, limite, 0));
+                    if (numero < 90) {
+                        System.out.println("El tangente de "+ numero + " es de : "+tan(numero, limite, 1,resultado));
+                    }else{
+                        System.out.println("La operacion para tangente no es valida");
+                    }
                     break;
                 case 3:
                     opcion = 3;
@@ -88,7 +93,7 @@ static Scanner read = new Scanner(System.in);
             double num = Math.pow(-1, contador);
             double denom = 2*contador;
             double denomF = 1;
-            for (int i = 1; i < denom; i++) {
+            for (int i = 1; i <= denom; i++) {
                 denomF *=i; 
             }
             double parteF = Math.pow(num, 2*contador);
@@ -98,7 +103,7 @@ static Scanner read = new Scanner(System.in);
             double num = Math.pow(-1, contador);
             double denom = 2*contador;
             double denomF = 1;
-            for (int i = 1; i < denom; i++) {
+            for (int i = 1; i <= denom; i++) {
                 denomF *=i; 
             }
             double parteF = Math.pow(num, 2*contador);
@@ -107,7 +112,34 @@ static Scanner read = new Scanner(System.in);
         }
     }
     
-    public static double tan(double numero,int limite, int contador){
-        return 1;
+    public static double tan(double numero,int limite, int contador,double resultado){
+        double m = (3.1416/2);
+        if (contador == limite) {
+            if (resultado>m) {
+                resultado = 0;
+                return resultado;
+            }else{
+                double num = 2*contador*(Math.pow(-4, contador))*(1-Math.pow(4, contador));
+                double denom = 2*contador;
+                double denomF = 0;
+                for (int i = 1; i <= denom; i++) {
+                denomF *=i;
+                }
+                double parteF = Math.pow(num, 2*contador-1);
+                resultado = (num/denomF)*parteF;
+                return resultado;
+            }
+        }else{
+            double num = 2*contador*(Math.pow(-4, contador))*(1-Math.pow(4, contador));
+            double denom = 2*contador;
+            double denomF = 0;
+            for (int i = 1; i <= denom; i++) {
+                denomF *=i;
+            }
+            double parteF = Math.pow(num, 2*contador-1);
+            resultado = (num/denomF)*parteF;
+            return resultado + tan(numero, limite, contador+1,resultado);
+        }
+        
     }
 }
