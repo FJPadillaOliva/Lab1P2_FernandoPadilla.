@@ -19,7 +19,20 @@ static Scanner read = new Scanner(System.in);
             opcion = read.nextInt();
             switch(opcion){
                 case 1:
-                    
+                    int a = 0;
+                    int b = 0;
+                    int c = 0;
+                    while(a==0){
+                      System.out.println("Ingrese el valor de a: ");
+                      a = read.nextInt();
+                        if (a==0) {
+                            System.out.println("El valor de a no puede ser 0");
+                        }
+                    }
+                    System.out.println("Ingrese el valor de b: ");
+                    b = read.nextInt();
+                    System.out.println("Igrese el valor de c: ");
+                    c = read.nextInt();
                     break;
                 case 2:
                     double numero = 0;
@@ -28,9 +41,10 @@ static Scanner read = new Scanner(System.in);
                     numero = read.nextInt();
                     System.out.println("Ingrese el limite de la sumatoria: ");
                     limite = read.nextInt();
-                    double sen = sen(numero,limite);
-                    double cos = cos(numero,limite);
-                    double tan = tan(numero,limite);
+                    double sen = sen(numero,limite,0);
+                    double cos = cos(numero,limite,0);
+                    double tan = tan(numero,limite,1);
+                    System.out.println("El seno de " + numero +" es de: "+sen);
                     break;
                 case 3:
                     opcion = 3;
@@ -42,7 +56,37 @@ static Scanner read = new Scanner(System.in);
         } while (opcion!=3);
     }
     
-    public static double sen(double numero,int limite){
-        
+    public static int newtonRaphson(int a, int b, int c, int desp){
+        return 1;
+    }
+    
+    public static double sen(double numero,int limite, int contador){
+        if (contador == limite) {
+            double num = Math.pow(-1, contador);
+            double denom = ((2*numero)+1);
+            double denomF = 1;
+            for (int i = 1; i <= denom; i++) {
+                denomF*=i;
+            }
+            double parteF = Math.pow(num, (2*contador)+1);
+            return ((num/denomF)*parteF);
+        }else{
+            double num = Math.pow(-1, contador);
+            double denom = ((2*numero)+1);
+            double denomF = 1;
+            for (int i = 1; i <= denom; i++) {
+                denomF*=i;
+            }
+            double parteF = Math.pow(num, (2*contador)+1);
+            return ((num/denomF)*parteF)+sen(numero, limite, contador+1);
+        }
+    }
+    
+    public static double cos(double numero,int limite, int contador){
+        return 1;
+    }
+    
+    public static double tan(double numero,int limite, int contador){
+        return 1;
     }
 }
