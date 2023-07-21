@@ -41,9 +41,9 @@ static Scanner read = new Scanner(System.in);
                     numero = read.nextInt();
                     System.out.println("Ingrese el limite de la sumatoria: ");
                     limite = read.nextInt();
-                    double cos = cos(numero,limite,0);
                     double tan = tan(numero,limite,1);
                     System.out.println("El seno de " + numero +" es de: "+sen(numero, limite, 0));
+                    System.out.println("El coseno de "+ numero + " es de : "+cos(numero, limite, opcion));
                     break;
                 case 3:
                     opcion = 3;
@@ -85,9 +85,25 @@ static Scanner read = new Scanner(System.in);
     
     public static double cos(double numero,int limite, int contador){
         if (contador == limite) {
-            double num = 
+            double num = Math.pow(-1, contador);
+            double denom = 2*contador;
+            double denomF = 1;
+            for (int i = 1; i < denom; i++) {
+                denomF *=i; 
+            }
+            double parteF = Math.pow(num, 2*contador);
+            double resultado = (num/denomF)*parteF;
+            return resultado;
         }else{
-            
+            double num = Math.pow(-1, contador);
+            double denom = 2*contador;
+            double denomF = 1;
+            for (int i = 1; i < denom; i++) {
+                denomF *=i; 
+            }
+            double parteF = Math.pow(num, 2*contador);
+            double resultado = (num/denomF)*parteF;
+            return resultado + cos(numero, limite, contador+1);
         }
     }
     
