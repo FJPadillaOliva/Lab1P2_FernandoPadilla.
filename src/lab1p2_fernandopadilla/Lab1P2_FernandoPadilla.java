@@ -41,10 +41,9 @@ static Scanner read = new Scanner(System.in);
                     numero = read.nextInt();
                     System.out.println("Ingrese el limite de la sumatoria: ");
                     limite = read.nextInt();
-                    double sen = sen(numero,limite,0);
                     double cos = cos(numero,limite,0);
                     double tan = tan(numero,limite,1);
-                    System.out.println("El seno de " + numero +" es de: "+sen);
+                    System.out.println("El seno de " + numero +" es de: "+sen(numero, limite, 0));
                     break;
                 case 3:
                     opcion = 3;
@@ -69,7 +68,8 @@ static Scanner read = new Scanner(System.in);
                 denomF*=i;
             }
             double parteF = Math.pow(num, (2*contador)+1);
-            return ((num/denomF)*parteF);
+            double resultado = (num/denomF)*parteF;
+            return resultado;
         }else{
             double num = Math.pow(-1, contador);
             double denom = ((2*numero)+1);
@@ -78,12 +78,17 @@ static Scanner read = new Scanner(System.in);
                 denomF*=i;
             }
             double parteF = Math.pow(num, (2*contador)+1);
-            return ((num/denomF)*parteF)+sen(numero, limite, contador+1);
+            double resultado = (num/denomF)*parteF;
+            return resultado+sen(numero, limite, contador+1);
         }
     }
     
     public static double cos(double numero,int limite, int contador){
-        return 1;
+        if (contador == limite) {
+            double num = 
+        }else{
+            
+        }
     }
     
     public static double tan(double numero,int limite, int contador){
