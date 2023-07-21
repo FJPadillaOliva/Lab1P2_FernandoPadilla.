@@ -1,20 +1,36 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+
 package lab1p2_fernandopadilla;
 
-/**
- *
- * @author Wendy
- */
+import java.util.Scanner;
+
+
 public class Lab1P2_FernandoPadilla {
 
-    /**
-     * @param args the command line arguments
-     */
+static Scanner read = new Scanner(System.in);
+    
     public static void main(String[] args) {
-        // TODO code application logic here
+        int opcion = 0;
+        do {
+            System.out.println("------------MENU------------\n"
+                    + "1)Ejercicio 1\n"
+                    + "2)Ejercicio 2\n"
+                    + "3)Salir");
+            opcion = read.nextInt();
+            switch(opcion){
+                case 1:
+                    
+                    break;
+                case 2:
+                    
+                    break;
+                case 3:
+                    opcion = 3;
+                    break;
+                default :
+                    System.out.println("Opcion no valida");
+                    break;
+            }
+        } while (opcion!=3);
     }
     
 }
