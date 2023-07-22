@@ -12,8 +12,8 @@ static Scanner read = new Scanner(System.in);
         int opcion = 0;
         do {
             System.out.println("------------MENU------------\n"
-                    + "1)Ejercicio 1\n"
-                    + "2)Ejercicio 2\n"
+                    + "1)Aproximacion de ceros\n"
+                    + "2)Serie de Taylor\n"
                     + "3)Salir");
             System.out.print("Seleccione una opcion: ");
             opcion = read.nextInt();
@@ -22,6 +22,8 @@ static Scanner read = new Scanner(System.in);
                     int a = 0;
                     int b = 0;
                     int c = 0;
+                    int iteraciones = 100;
+                    int desp = 200;
                     while(a==0){
                       System.out.println("Ingrese el valor de a: ");
                       a = read.nextInt();
@@ -33,6 +35,10 @@ static Scanner read = new Scanner(System.in);
                     b = read.nextInt();
                     System.out.println("Igrese el valor de c: ");
                     c = read.nextInt();
+                    double[] respuesta = metodoP(a, b, c, desp, iteraciones);
+                    System.out.println("Raiz 1: "+ respuesta[0]);
+                    System.out.println("Raiz 2: "+ respuesta[1]);
+                    System.out.println("Iteraciones: "+iteraciones);
                     break;
                 case 2:
                     double numero = 0;
@@ -60,8 +66,39 @@ static Scanner read = new Scanner(System.in);
         } while (opcion!=3);
     }
     
-    public static int newtonRaphson(int a, int b, int c, int desp){
-        return 1;
+    public static double f(double x,int a, int b,int c){
+        return a * Math.pow(x, 2) + b * x + c;
+    }
+    
+    public static double fprima(double x,int a, int b){
+        return 2 * a * x + b;
+    }
+    
+    public static double[] vertices(int a, int b, int c){
+        double verticeX = -(b) / (2 * a);
+        double verticeY = f((int)verticeX, a, b, c);
+        return new double[]{verticeX,verticeY};
+    }
+    
+    public static double[] metodoP(int a, int b, int c, int desplazamiento, int iteraciones){
+        double[] vertices = vertices(a, b, c);
+        double x0D = vertices[0] + desplazamiento;
+        double x0I = vertices[0] - desplazamiento;
+        double raizD = newtonRaphson(a, b, c, (int)x0D, iteraciones);
+        double raizI = newtonRaphson(a, b, c, (int)x0I, iteraciones);
+        return new double[]{raizI,raizD};
+    }
+    
+    
+    public static double newtonRaphson(int a, int b, int c, double x,int iteraciones){
+        if (iteraciones == 0) {
+            return x;
+        }else{
+            double funcion = f(x, a, b, c);
+            double funcionp = fprima(x, a, b);
+            double funcionN = x - (funcion/funcionp);
+            return newtonRaphson(a, b, c, funcionN, iteraciones-1);
+        }
     }
     
     public static double sen(double numero,int limite, int contador){
@@ -119,7 +156,7 @@ static Scanner read = new Scanner(System.in);
                 resultado = 0;
                 return resultado;
             }else{
-                double num = 2*contador*(Math.pow(-4, contador))*(1-Math.pow(4, contador));
+                double num = Math.pow(2, contador)*(Math.pow(-4, contador))*(1-Math.pow(4, contador));
                 double denom = 2*contador;
                 double denomF = 0;
                 for (int i = 1; i <= denom; i++) {
@@ -130,7 +167,7 @@ static Scanner read = new Scanner(System.in);
                 return resultado;
             }
         }else{
-            double num = 2*contador*(Math.pow(-4, contador))*(1-Math.pow(4, contador));
+            double num = Math.pow(2, contador)*(Math.pow(-4, contador))*(1-Math.pow(4, contador));
             double denom = 2*contador;
             double denomF = 0;
             for (int i = 1; i <= denom; i++) {
